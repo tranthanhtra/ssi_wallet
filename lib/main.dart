@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ssi_wallet/features/login/view/login_screen.dart';
+import 'package:ssi_wallet/global_controller.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,6 +13,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  GlobalController globalController = Get.put(GlobalController());
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
