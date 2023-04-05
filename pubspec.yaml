@@ -35,6 +35,7 @@ dependencies:
   web3dart: ^2.6.1
   http: ^0.13.5
   get_storage: ^2.1.1
+  qrscan: ^0.3.3
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -60,6 +61,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/icons/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

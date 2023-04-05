@@ -3,4 +3,5 @@ class Const {
   static String addressKey = "address";
   static String didKey = "did";
   static String privateKey = "privateKey";
+  static String credentialKey = "credentials";
 }

@@ -11,16 +11,17 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton(
       {Key? key,
-        required this.text,
-        required this.onClick,
-        this.backgroundColor = Colors.green,
-        this.borderColor = Colors.green,
-        this.textColor = Colors.white,
-        this.textStyle = const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w700,
-          fontSize: 16,
-        )})
+      required this.text,
+      required this.onClick,
+      this.backgroundColor = Colors.green,
+      this.borderColor = Colors.green,
+      this.textColor = Colors.white,
+      this.textStyle = const TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.w700,
+        fontSize: 16,
+      ),
+      this.icon})
       : super(key: key);
 
   final String text;
@@ -29,19 +30,11 @@ class CustomButton extends StatelessWidget {
   final Color borderColor;
   final Color textColor;
   final TextStyle textStyle;
+  final Image? icon;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Padding(
-        padding: const EdgeInsets.all(0),
-        child: Center(
-          child: Text(
-            text,
-            style: textStyle,
-          ),
-        ),
-      ),
       style: ButtonStyle(
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
@@ -54,6 +47,15 @@ class CustomButton extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all(backgroundColor),
       ),
       onPressed: onClick,
+      child: Padding(
+        padding: const EdgeInsets.all(0),
+        child: Center(
+          child: icon ?? Text(
+                  text,
+                  style: textStyle,
+                ),
+        ),
+      ),
     );
   }
 }
