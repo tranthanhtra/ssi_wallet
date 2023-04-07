@@ -7,7 +7,7 @@ class CustomDialog extends StatefulWidget {
     required this.title,
     required this.description,
     required this.inputField,
-    required this.textEditingController,
+    this.textEditingController,
     required this.onContinue,
   }) : super(key: key);
 
@@ -15,7 +15,7 @@ class CustomDialog extends StatefulWidget {
   State<CustomDialog> createState() => _CustomDialogState();
   final String title, description;
   bool inputField = false;
-  TextEditingController textEditingController;
+  TextEditingController? textEditingController;
   Function onContinue;
 }
 
@@ -40,7 +40,7 @@ class _CustomDialogState extends State<CustomDialog> {
           widget.inputField
               ? CustomInputField(
                   hintText: "",
-                  controller: widget.textEditingController,
+                  controller: widget.textEditingController ?? TextEditingController(),
                   labelText: "")
               : SizedBox(),
           SizedBox(height: 20),

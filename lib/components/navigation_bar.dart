@@ -27,7 +27,7 @@ class CustomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: getHeight(80),
-      color: AppColors.grey,
+      color: AppColors.card,
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -61,31 +61,26 @@ class NavigationButton extends StatelessWidget {
           globalController.onChangeTab(index);
         },
         child: SizedBox(
+          height: getHeight(50),
           width: getWidth(70),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                height: 5,
-                color: globalController.currentPage.value == index
-                    ? AppColors.heavyBlue
-                    : AppColors.grey,
-              ),
               Image.asset(
                 asset,
                 width: getWidth(24),
                 height: getHeight(30),
                 color: globalController.currentPage.value == index
-                    ? AppColors.heavyBlue
+                    ? AppColors.button
                     : AppColors.greyShade,
               ),
               Text(
                 title,
                 style: TextStyle(
-                  fontSize: getWidth(20),
-                  fontWeight: FontWeight.w700,
+                  fontSize: getWidth(15),
+                  fontWeight: FontWeight.w400,
                   color: globalController.currentPage.value == index
-                      ? AppColors.heavyBlue
+                      ? AppColors.button
                       : AppColors.greyShade,
                 ),
               ),

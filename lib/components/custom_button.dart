@@ -30,7 +30,7 @@ class CustomButton extends StatelessWidget {
   final Color borderColor;
   final Color textColor;
   final TextStyle textStyle;
-  final Image? icon;
+  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
