@@ -5,6 +5,7 @@ import 'package:ssi_wallet/components/custom_input_field.dart';
 import 'package:ssi_wallet/features/home/view/home_screen.dart';
 import 'package:ssi_wallet/features/import_wallet/view/import_screen.dart';
 import 'package:ssi_wallet/features/login/controller/login_controller.dart';
+import 'package:ssi_wallet/global_controller.dart';
 import 'package:ssi_wallet/utils/config.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -33,8 +34,13 @@ class LoginScreen extends StatelessWidget {
                 var result = await loginController.login();
 
                 if (result) {
-                  Get.to(loginController.hasAccount ? HomeScreen() : ImportScreen());
-                }else {
+                  if (loginController.hasAccount) {
+                    Get.put(GlobalController()).getAccount();
+                    Get.to(HomeScreen());
+                  } else {
+                    Get.to(ImportScreen());
+                  }
+                } else {
                   print("wrong pw");
                 }
               },

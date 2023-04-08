@@ -10,9 +10,14 @@ class GlobalController extends GetxController {
   late Web3Client ethClient;
   late GetStorage db;
 
-  PageController pageController = PageController(initialPage: 0, keepPage: true);
+  PageController pageController =
+      PageController(initialPage: 0, keepPage: true);
 
   RxInt currentPage = 0.obs;
+
+  late String address;
+  late RxString did = "".obs;
+  late EtherAmount balance;
 
   @override
   onInit() async {
@@ -24,9 +29,13 @@ class GlobalController extends GetxController {
     super.onInit();
   }
 
+  getAccount() {
+    address = db.read(Const.addressKey);
+    did.value = db.read(Const.didKey) ?? "";
+  }
+
   getBalance() async {
-    EtherAmount balance = await ethClient.getBalance(
-        db.read(Const.addressKey));
+    balance = await ethClient.getBalance(EthereumAddress.fromHex(address));
   }
 
   onChangeTab(int value) {
@@ -38,4 +47,5 @@ class GlobalController extends GetxController {
       pageController = PageController(initialPage: value, keepPage: true);
     }
   }
+
 }

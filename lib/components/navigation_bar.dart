@@ -8,11 +8,11 @@ import '../global_controller.dart';
 const List<Map<String, dynamic>> pages = [
   {
     "image": "assets/icons/home.png",
-    "title": "Home",
+    "title": "Account",
   },
   {
     "image": "assets/icons/credentials.png",
-    "title": "Upload",
+    "title": "Certificate",
   },
   {
     "image": "assets/icons/home.png",

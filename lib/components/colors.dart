@@ -8,4 +8,5 @@ class AppColors {
   static const card = Color(0xFFEDF1F9);
   static const button = Color(0xFF3783F5);
   static const textOnWhite = Color(0xFF347AF0);
+  static const titleOnWhite = Color(0xFF0D1F3C);
 }

@@ -9,9 +9,15 @@ TextStyle headerTextStyle() {
     color: Colors.black,
   );
 }
+
 class KTextStyle {
-  static const balance = TextStyle(
-      color: Colors.black, fontSize: 30, fontWeight: FontWeight.w700);
-  static const smallButton = TextStyle(
-    color: AppColors.textOnWhite, fontSize: 25);
+  static const balance =
+      TextStyle(color: Colors.black, fontSize: 30, fontWeight: FontWeight.w700);
+  static const smallButton =
+      TextStyle(color: AppColors.textOnWhite, fontSize: 25);
+  static const bigTile = TextStyle(
+      color: AppColors.titleOnWhite, fontSize: 40, fontWeight: FontWeight.w700);
+  static const address = TextStyle(color: AppColors.titleOnWhite, fontSize: 25);
+  static const label = TextStyle(
+      color: AppColors.titleOnWhite, fontSize: 30, fontWeight: FontWeight.w500);
 }
