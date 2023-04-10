@@ -15,8 +15,8 @@ const List<Map<String, dynamic>> pages = [
     "title": "Certificate",
   },
   {
-    "image": "assets/icons/home.png",
-    "title": "Profile",
+    "image": "assets/icons/check-circle.png",
+    "title": "Verify",
   },
 ];
 

@@ -8,12 +8,20 @@ import 'package:pointycastle/digests/sha3.dart';
 import 'package:ssi_wallet/global_controller.dart';
 import 'package:ssi_wallet/utils/constants.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:web3dart/contracts.dart';
+import 'package:web3dart/credentials.dart';
 import 'package:web3dart/crypto.dart';
 
 Uint8List sha3Digest(Uint8List dataToDigest) {
   final d = SHA3Digest(256);
 
   return d.process(dataToDigest);
+}
+
+Uint8List convertStringToUint8List(String str) {
+  final List<int> codeUnits = str.codeUnits;
+  final Uint8List unit8List = Uint8List.fromList(codeUnits);
+  return unit8List;
 }
 
 class CredentialController extends GetxController {
@@ -94,17 +102,19 @@ class CredentialController extends GetxController {
       // print(jsonEncode(json));
       var newVP = {...VPModel};
       newVP["verifiableCredential"] = [json];
-      newVP["holder"] = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9";
+      newVP["holder"] = globalController.did.value;
       // print(jsonEncode(newVP));
       var hash = sha3Digest(convertStringToUint8List(jsonEncode(newVP)));
-      // print(bufferToHex(hash));
-      final signature = EthSigUtil.signMessage(privateKey: globalController.db.read(Const.privateKey), message: hash);
-      // print (signature);
+      print(bufferToHex(hash));
+      final signature = EthSigUtil.signMessage(
+          privateKey: globalController.db.read(Const.privateKey),
+          message: (hash));
+      print (signature);
       var proof = {...presentationProofModel};
       proof["created"] = DateTime.now().toString();
       proof["proofValue"] = signature;
       newVP["proof"] = proof;
-      print(jsonEncode(newVP));
+      // print(jsonEncode(newVP));
       return jsonEncode(newVP);
     } catch (err) {
       print(err);
@@ -112,9 +122,6 @@ class CredentialController extends GetxController {
     }
   }
 
-  Uint8List convertStringToUint8List(String str) {
-    final List<int> codeUnits = str.codeUnits;
-    final Uint8List unit8List = Uint8List.fromList(codeUnits);
-    return unit8List;
-  }
+
+
 }

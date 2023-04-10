@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ssi_wallet/components/navigation_bar.dart';
 import 'package:ssi_wallet/features/account/view/account_screen.dart';
 import 'package:ssi_wallet/features/credential/view/cridentials_screen.dart';
+import 'package:ssi_wallet/features/verification/view/verification_screen.dart';
 import 'package:ssi_wallet/global_controller.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           AccountScreen(),
           CredentialsScreen(),
-          CredentialsScreen(),
+          VerificationScreen(),
         ],
       ),
     );  }
