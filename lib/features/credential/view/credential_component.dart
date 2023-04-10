@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ssi_wallet/components/colors.dart';
 import 'package:ssi_wallet/components/custom_button.dart';
+import 'package:ssi_wallet/components/signature.dart';
+import 'package:ssi_wallet/components/text_style.dart';
 import 'package:ssi_wallet/features/credential/controller/credential_controller.dart';
 import 'package:ssi_wallet/features/credential/controller/qr_controller.dart';
 import 'package:ssi_wallet/features/credential/view/qr_screen.dart';
@@ -45,6 +47,31 @@ class CredentialComponent extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  CustomButton(
+                    text: "",
+                    onClick: () {
+                      var string =
+                      Get.put(CredentialController()).createPresentation(index);
+                      if (string != "") {
+                        var result = Get.put(QrController()).qrGenerate(string);
+                        if (result) Get.to(QrScreen());
+                      }
+                    },
+                    icon: Column(
+                      children: [
+                        Icon(
+                          Icons.folder_shared,
+                          size: 25,
+                        ),
+                        Text(
+                          "VP",
+                          style: KTextStyle.tinyButton,
+                        ),
+                      ],
+                    ),
+                    backgroundColor: Colors.transparent,
+                    borderColor: Colors.transparent,
+                  ),
                   CustomButton(
                     text: "",
                     onClick: () {

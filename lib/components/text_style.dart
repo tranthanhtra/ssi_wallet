@@ -20,4 +20,6 @@ class KTextStyle {
   static const address = TextStyle(color: AppColors.titleOnWhite, fontSize: 25);
   static const label = TextStyle(
       color: AppColors.titleOnWhite, fontSize: 30, fontWeight: FontWeight.w500);
+  static const tinyButton =
+  TextStyle(color: AppColors.textOnWhite, fontSize: 15);
 }

@@ -1,9 +1,20 @@
 import 'dart:convert';
+import 'dart:typed_data';
+import 'package:eth_sig_util/eth_sig_util.dart';
+import 'package:eth_sig_util/util/bytes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pointycastle/digests/sha3.dart';
 import 'package:ssi_wallet/global_controller.dart';
 import 'package:ssi_wallet/utils/constants.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:web3dart/crypto.dart';
+
+Uint8List sha3Digest(Uint8List dataToDigest) {
+  final d = SHA3Digest(256);
+
+  return d.process(dataToDigest);
+}
 
 class CredentialController extends GetxController {
   TextEditingController credentialInput = TextEditingController();
@@ -24,11 +35,12 @@ class CredentialController extends GetxController {
       var list = credentials == null ? [] : List.from(jsonDecode(credentials));
       List finalList = [];
 
-      for (int i = 0; i< list.length; i++) {
+      for (int i = 0; i < list.length; i++) {
         finalList.add(jsonEncode(list[i]));
       }
       finalList.add(jsonEncode(credentialInput.text));
-      await globalController.db.write(Const.credentialKey, finalList.toString());
+      await globalController.db
+          .write(Const.credentialKey, finalList.toString());
       getCredentialList();
       return true;
     } catch (err) {
@@ -56,11 +68,11 @@ class CredentialController extends GetxController {
       }
 
       finalList.removeAt(index);
-      await globalController.db.write(
-          Const.credentialKey, finalList.toString());
+      await globalController.db
+          .write(Const.credentialKey, finalList.toString());
       getCredentialList();
       return true;
-    } catch(err) {
+    } catch (err) {
       print(err);
       return false;
     }
@@ -70,9 +82,39 @@ class CredentialController extends GetxController {
     try {
       var json = (jsonEncode(credentials[index]));
       return json;
-    } catch(err) {
+    } catch (err) {
       print(err);
       return "";
     }
+  }
+
+  createPresentation(int index) {
+    try {
+      var json = (jsonDecode(credentials[index]));
+      // print(jsonEncode(json));
+      var newVP = {...VPModel};
+      newVP["verifiableCredential"] = [json];
+      newVP["holder"] = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9";
+      // print(jsonEncode(newVP));
+      var hash = sha3Digest(convertStringToUint8List(jsonEncode(newVP)));
+      // print(bufferToHex(hash));
+      final signature = EthSigUtil.signMessage(privateKey: globalController.db.read(Const.privateKey), message: hash);
+      // print (signature);
+      var proof = {...presentationProofModel};
+      proof["created"] = DateTime.now().toString();
+      proof["proofValue"] = signature;
+      newVP["proof"] = proof;
+      print(jsonEncode(newVP));
+      return jsonEncode(newVP);
+    } catch (err) {
+      print(err);
+      return "";
+    }
+  }
+
+  Uint8List convertStringToUint8List(String str) {
+    final List<int> codeUnits = str.codeUnits;
+    final Uint8List unit8List = Uint8List.fromList(codeUnits);
+    return unit8List;
   }
 }
