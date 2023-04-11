@@ -72,23 +72,23 @@ class CredentialComponent extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     borderColor: Colors.transparent,
                   ),
-                  CustomButton(
-                    text: "",
-                    onClick: () {
-                      var string =
-                          Get.put(CredentialController()).qrGenerate(index);
-                      if (string != "") {
-                        var result = Get.put(QrController()).qrGenerate(string);
-                        if (result) Get.to(QrScreen());
-                      }
-                    },
-                    icon: Icon(
-                      Icons.qr_code,
-                      size: 40,
-                    ),
-                    backgroundColor: Colors.transparent,
-                    borderColor: Colors.transparent,
-                  ),
+                  // CustomButton(
+                  //   text: "",
+                  //   onClick: () {
+                  //     var string =
+                  //         Get.put(CredentialController()).qrGenerate(index);
+                  //     if (string != "") {
+                  //       var result = Get.put(QrController()).qrGenerate(string);
+                  //       if (result) Get.to(QrScreen());
+                  //     }
+                  //   },
+                  //   icon: Icon(
+                  //     Icons.qr_code,
+                  //     size: 40,
+                  //   ),
+                  //   backgroundColor: Colors.transparent,
+                  //   borderColor: Colors.transparent,
+                  // ),
                   CustomButton(
                     text: "",
                     onClick: () {

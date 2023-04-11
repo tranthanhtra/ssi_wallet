@@ -55,26 +55,8 @@ class AccountScreen extends StatelessWidget {
                 borderColor: Colors.white,
                 text: "",
                 onClick: () async {
-                  // await Clipboard.setData(ClipboardData(
-                  //     text: globalController.did.value));
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return CustomDialog(
-                          title: "Import DID",
-                          description: "Copy your DID here",
-                          inputField: true,
-                          textEditingController: accountController.didString,
-                          onContinue: () async {
-                            await globalController.db.write(
-                                Const.didKey, accountController.didString.text);
-                            globalController.getAccount();
-                            if (context.mounted) {
-                              Navigator.of(context).pop();
-                            }
-                          },
-                        );
-                      });
+                  await Clipboard.setData(ClipboardData(
+                      text: globalController.address));
                 },
                 icon: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -161,26 +143,9 @@ class AccountScreen extends StatelessWidget {
                 borderColor: Colors.white,
                 text: "",
                 onClick: () async {
-                  // await Clipboard.setData(ClipboardData(
-                  //     text: globalController.did.value));
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return CustomDialog(
-                          title: "Import DID",
-                          description: "Copy your DID here",
-                          inputField: true,
-                          textEditingController: accountController.didString,
-                          onContinue: () async {
-                            await globalController.db.write(
-                                Const.didKey, accountController.didString.text);
-                            globalController.getAccount();
-                            if (context.mounted) {
-                              Navigator.of(context).pop();
-                            }
-                          },
-                        );
-                      });
+                  await Clipboard.setData(ClipboardData(
+                      text: globalController.did.value));
+
                 },
                 icon: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

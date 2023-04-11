@@ -22,6 +22,7 @@ class CredentialsScreen extends StatelessWidget {
           () {
             var credentials = credentialController.credentials.value;
             return ListView(
+              padding: EdgeInsets.all(10),
               children: List.generate(
                 credentials.length,
                 (index) {

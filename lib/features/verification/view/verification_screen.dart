@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ssi_wallet/components/custom_button.dart';
@@ -20,22 +23,32 @@ class VerificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      padding: EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(
+            height: getHeight(200),
+          ),
           CustomInputField(
             hintText: "",
             controller: verificationController.credentialJson,
             labelText: "Input the presentation",
           ),
-          CustomButton(
-            text: "Verify",
-            onClick: () async {
-              await verificationController.verifyPresentation(
-                verificationController.credentialJson.text,
-              );
-            },
+          SizedBox(
+            height: getHeight(50),
+          ),
+          SizedBox(
+            width: getWidth(100),
+            child: CustomButton(
+              text: "Verify",
+              onClick: () async {
+                await verificationController.verifyPresentation(
+                  verificationController.credentialJson.text,
+                );
+              },
+            ),
           ),
           Obx(() {
             var valid = verificationController.valid.value;
@@ -53,32 +66,34 @@ class VerificationScreen extends StatelessWidget {
                         size: 60,
                       );
           }),
-          Expanded(
-            child: Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: SizedBox(
-                height: getHeight(50),
-                width: getWidth(50),
-                child: CustomButton(
-                  text: "",
-                  onClick: () {
-                    verificationController.valid.value = 0;
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => QrScanScreen(),
+          kIsWeb
+              ? SizedBox()
+              : Expanded(
+                  child: Align(
+                    alignment: FractionalOffset.bottomCenter,
+                    child: SizedBox(
+                      height: getHeight(50),
+                      width: getWidth(50),
+                      child: CustomButton(
+                        text: "",
+                        onClick: () {
+                          verificationController.valid.value = 0;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => QrScanScreen(),
+                            ),
+                          );
+                        },
+                        backgroundColor: AppColors.button,
+                        icon: const Icon(
+                          Icons.qr_code,
+                          color: Colors.white,
+                        ),
                       ),
-                    );
-                  },
-                  backgroundColor: AppColors.button,
-                  icon: const Icon(
-                    Icons.qr_code,
-                    color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-            ),
-          )
         ],
       ),
     );
