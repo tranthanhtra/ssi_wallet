@@ -35,8 +35,8 @@ class QrScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: getHeight(250),
-              width: getWidth(250),
+              height: getHeight(400),
+              width: getWidth(400),
               color: Colors.white,
               child: qrController.qrImage,
             ),

@@ -24,8 +24,8 @@ class VerificationController extends GetxController {
     super.onInit();
   }
 
-  verifyPresentation() async {
-    var VP = jsonDecode(credentialJson.text);
+  verifyPresentation(String json) async {
+    var VP = jsonDecode(json);
     var holder = VP["holder"];
     var content = {...VPModel};
     var proof = VP["proof"];

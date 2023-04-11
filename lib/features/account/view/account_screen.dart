@@ -38,38 +38,97 @@ class AccountScreen extends StatelessWidget {
                 "Address",
                 style: KTextStyle.label,
               ),
-              SizedBox(
-                height: getHeight(50),
-                width: getWidth(100),
-                child: CustomButton(
-                  backgroundColor: Colors.white,
-                  borderColor: Colors.white,
-                  text: "",
-                  onClick: () async {
-                    await Clipboard.setData(ClipboardData(
-                      text: globalController.address,
-                    ));
-                  },
-                  icon: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.copy,
-                        size: 25,
-                      ),
-                      Text(
-                        "Copy",
-                        style: KTextStyle.smallButton,
-                      ),
-                    ],
-                  ),
-                ),
-              )
             ],
           ),
           Text(
             globalController.address.replaceRange(7, 37, "..."),
             style: KTextStyle.address,
+          ),
+          SizedBox(
+            height: getHeight(10),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomButton(
+                backgroundColor: Colors.white,
+                borderColor: Colors.white,
+                text: "",
+                onClick: () async {
+                  // await Clipboard.setData(ClipboardData(
+                  //     text: globalController.did.value));
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return CustomDialog(
+                          title: "Import DID",
+                          description: "Copy your DID here",
+                          inputField: true,
+                          textEditingController: accountController.didString,
+                          onContinue: () async {
+                            await globalController.db.write(
+                                Const.didKey, accountController.didString.text);
+                            globalController.getAccount();
+                            if (context.mounted) {
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        );
+                      });
+                },
+                icon: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.copy,
+                      size: 25,
+                    ),
+                    Text(
+                      "Copy",
+                      style: KTextStyle.smallButton,
+                    ),
+                  ],
+                ),
+              ),
+              // CustomButton(
+              //   backgroundColor: Colors.white,
+              //   borderColor: Colors.white,
+              //   text: "",
+              //   onClick: () async {
+              //     showDialog(
+              //         context: context,
+              //         builder: (context) {
+              //           return CustomDialog(
+              //             title: "Import DID",
+              //             description: "Copy your DID here",
+              //             inputField: true,
+              //             textEditingController: accountController.didString,
+              //             onContinue: () async {
+              //               await globalController.db.write(
+              //                   Const.didKey, accountController.didString.text);
+              //               globalController.getAccount();
+              //               if (context.mounted) {
+              //                 Navigator.of(context).pop();
+              //               }
+              //             },
+              //           );
+              //         });
+              //   },
+              //   icon: Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       Icon(
+              //         Icons.download,
+              //         size: 30,
+              //       ),
+              //       Text(
+              //         "Import",
+              //         style: KTextStyle.smallButton,
+              //       ),
+              //     ],
+              //   ),
+              // )
+            ],
           ),
           SizedBox(
             height: getHeight(50),
@@ -80,75 +139,6 @@ class AccountScreen extends StatelessWidget {
               Text(
                 "DID",
                 style: KTextStyle.label,
-              ),
-              SizedBox(
-                height: getHeight(50),
-                width: getWidth(110),
-                child: Obx(() {
-                  return globalController.did.value == ""
-                      ? CustomButton(
-                          backgroundColor: Colors.white,
-                          borderColor: Colors.white,
-                          text: "",
-                          onClick: () async {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return CustomDialog(
-                                    title: "Import DID",
-                                    description: "Copy your DID here",
-                                    inputField: true,
-                                    textEditingController:
-                                        accountController.didString,
-                                    onContinue: () async {
-                                      await globalController.db.write(
-                                          Const.didKey,
-                                          accountController.didString.text);
-                                      globalController.getAccount();
-                                      if (context.mounted) {
-                                        Navigator.of(context).pop();
-                                      }
-                                    },
-                                  );
-                                });
-                          },
-                          icon: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.download,
-                                size: 25,
-                              ),
-                              Text(
-                                "Import",
-                                style: KTextStyle.smallButton,
-                              ),
-                            ],
-                          ),
-                        )
-                      : CustomButton(
-                          backgroundColor: Colors.white,
-                          borderColor: Colors.white,
-                          text: "",
-                          onClick: () async {
-                            await Clipboard.setData(ClipboardData(
-                                text: globalController.did.value));
-                          },
-                          icon: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.copy,
-                                size: 25,
-                              ),
-                              Text(
-                                "Copy",
-                                style: KTextStyle.smallButton,
-                              ),
-                            ],
-                          ),
-                        );
-                }),
               ),
             ],
           ),
@@ -161,8 +151,91 @@ class AccountScreen extends StatelessWidget {
             );
           }),
           SizedBox(
-            height: getHeight(100),
+            height: getHeight(10),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomButton(
+                backgroundColor: Colors.white,
+                borderColor: Colors.white,
+                text: "",
+                onClick: () async {
+                  // await Clipboard.setData(ClipboardData(
+                  //     text: globalController.did.value));
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return CustomDialog(
+                          title: "Import DID",
+                          description: "Copy your DID here",
+                          inputField: true,
+                          textEditingController: accountController.didString,
+                          onContinue: () async {
+                            await globalController.db.write(
+                                Const.didKey, accountController.didString.text);
+                            globalController.getAccount();
+                            if (context.mounted) {
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        );
+                      });
+                },
+                icon: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.copy,
+                      size: 25,
+                    ),
+                    Text(
+                      "Copy",
+                      style: KTextStyle.smallButton,
+                    ),
+                  ],
+                ),
+              ),
+              CustomButton(
+                backgroundColor: Colors.white,
+                borderColor: Colors.white,
+                text: "",
+                onClick: () async {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return CustomDialog(
+                          title: "Import DID",
+                          description: "Copy your DID here",
+                          inputField: true,
+                          textEditingController: accountController.didString,
+                          onContinue: () async {
+                            await globalController.db.write(
+                                Const.didKey, accountController.didString.text);
+                            globalController.getAccount();
+                            if (context.mounted) {
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        );
+                      });
+                },
+                icon: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.download,
+                      size: 30,
+                    ),
+                    Text(
+                      "Import",
+                      style: KTextStyle.smallButton,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          )
         ],
       ),
     );
