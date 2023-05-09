@@ -273,3 +273,28 @@ const presentationProofModel = {
   "domain": "4jt78h47fh47",
   "proofValue": "eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..kTCYt5XsITJX1CxPCT8yAV-TVIw5WEuts01mq-pQy7UJiN5mgREEMGlv50aqzpqh4Qq_PbChOMqsLfRoPsnsgxD-WUcX16dUOqV0G_zS245-kronKb78cPktb3rk-BuQy72IFLN25DYuNzVBAh4vGHSrQyHUGlcTwLtjPAnKb78"
 };
+
+const VCModel = {
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2018/credentials/examples/v1"
+  ],
+
+  // "id": "http://example.edu/credentials/1872",
+
+  "type": ["VerifiableCredential"],
+
+  "issuer": "",
+
+  "issuanceDate": "2010-01-01T19:23:24Z",
+
+  "credentialSubject": {
+
+    "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
+
+    "degree": {
+      "type": "BachelorDegree",
+      "name": "Bachelor of Science and Arts"
+    }
+  },
+};

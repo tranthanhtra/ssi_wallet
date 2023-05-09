@@ -10,7 +10,7 @@ class ImportController extends GetxController {
 
   import() async {
     try {
-      var credentials = EthPrivateKey.fromHex(privateKey.text);
+      var credentials = EthPrivateKey.fromHex("0x${privateKey.text}");
       var address = await credentials.address;
 
 // You can now call rpc methods. This one will query the amount of Ether you own

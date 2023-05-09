@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:ssi_wallet/features/home/view/home_screen.dart';
+import 'package:ssi_wallet/features/import_wallet/view/import_screen.dart';
 import 'package:ssi_wallet/features/login/view/login_screen.dart';
 import 'package:ssi_wallet/global_controller.dart';
+import 'package:ssi_wallet/utils/constants.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +29,10 @@ class MyApp extends StatelessWidget {
   }
 
   Widget home() {
-    return LoginScreen();
+    return globalController.db.read(Const.passwordKey) != null
+        ? (globalController.db.read(Const.addressKey) != null
+            ? HomeScreen()
+            : ImportScreen())
+        : LoginScreen();
   }
 }

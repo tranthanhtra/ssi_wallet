@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:ssi_wallet/components/custom_dialog.dart';
 import 'package:ssi_wallet/features/account/controller/account_controller.dart';
+import 'package:ssi_wallet/features/credential/controller/credential_controller.dart';
 import 'package:ssi_wallet/global_controller.dart';
 
 import '../../../components/custom_button.dart';
@@ -57,6 +58,9 @@ class AccountScreen extends StatelessWidget {
                 onClick: () async {
                   await Clipboard.setData(ClipboardData(
                       text: globalController.address));
+                  // await globalController.db.remove(Const.credentialKey);
+                  // print(globalController.db.read(Const.credentialKey));
+                  // Get.put(CredentialController()).getCredentialList();
                 },
                 icon: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

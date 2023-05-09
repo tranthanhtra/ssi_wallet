@@ -8,7 +8,7 @@ class LoginController extends GetxController {
   bool hasAccount = false;
   GlobalController globalController = Get.put(GlobalController());
 
-  login() async {
+  login() {
     if (globalController.db.read(Const.passwordKey) == null) {
       globalController.db.write(Const.passwordKey, 'Tratran0501');
     }
@@ -19,5 +19,9 @@ class LoginController extends GetxController {
     }
 
     return false;
+  }
+
+  createPassword() async {
+    await globalController.db.write(Const.passwordKey, passwordController.text);
   }
 }

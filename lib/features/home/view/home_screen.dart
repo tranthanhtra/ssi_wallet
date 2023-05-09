@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       bottomNavigationBar: CustomNavigationBar(),
       body: PageView(
         controller: Get.put(GlobalController()).pageController,

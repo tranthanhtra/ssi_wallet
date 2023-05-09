@@ -9,4 +9,5 @@ class AppColors {
   static const button = Color(0xFF3783F5);
   static const textOnWhite = Color(0xFF347AF0);
   static const titleOnWhite = Color(0xFF0D1F3C);
+  static const loginScreen = Color(0xFF347AF0);
 }

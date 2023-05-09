@@ -59,8 +59,11 @@ class CredentialController extends GetxController {
 
   getCredentialList() {
     var string = globalController.db.read(Const.credentialKey);
+    print(string);
     if (string != null) {
       credentials.value = List.from(jsonDecode(string));
+    } else {
+      credentials.value = [];
     }
   }
 

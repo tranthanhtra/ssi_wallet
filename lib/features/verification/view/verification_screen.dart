@@ -47,6 +47,7 @@ class VerificationScreen extends StatelessWidget {
                 await verificationController.verifyPresentation(
                   verificationController.credentialJson.text,
                 );
+                FocusManager.instance.primaryFocus?.unfocus();
               },
             ),
           ),

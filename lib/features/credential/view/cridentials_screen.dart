@@ -26,7 +26,9 @@ class CredentialsScreen extends StatelessWidget {
               children: List.generate(
                 credentials.length,
                 (index) {
+                  print(credentials.length);
                   var credential = jsonDecode(credentials[index].toString());
+                  print(credential);
                   return CredentialComponent(
                     credentialName: credential["credentialSubject"]["degree"]
                         ["name"],

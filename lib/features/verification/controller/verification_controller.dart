@@ -35,7 +35,7 @@ class VerificationController extends GetxController {
     content["holder"] = VP["holder"];
     content["verifiableCredential"] = VP["verifiableCredential"];
 
-    print(content);
+    // print(content);
     var hash = sha3Digest(convertStringToUint8List(jsonEncode(content)));
 
     // print(bufferToHex(hash));
@@ -52,7 +52,46 @@ class VerificationController extends GetxController {
         contract: contract,
         function: verify,
         params: [hexToBytes(signature), hash]);
+    if (isValid[0]) {
+      // var listCredential = List.from(jsonDecode(jsonEncode(content["verifiableCredential"])));
+      // for (int i = 0; i < listCredential.length; i++) {
+      //   print(listCredential[i]);
+      //   var VCValid = await verifyCredential(listCredential[i]);
+      //   if (!VCValid) {
+      //     valid.value = -1;
+      //     return;
+      //   }
+      // }
+      valid.value = 1;
+    } else
+    valid.value = -1;
+  }
+
+  verifyCredential(Map<String, dynamic> VC) async {
+    // var VC = jsonDecode(json);
+    var issuer = VC["issuer"];
+    var content = {...VCModel};
+    var proof = VC["proof"];
+    var signature = proof["proofValue"];
+    content["@context"] = VC["@context"];
+    content["type"] = VC["type"];
+    content["issuer"] = VC["issuer"];
+    content["issuanceDate"] = VC["issuanceDate"];
+    content["credentialSubject"] = VC["credentialSubject"];
+
+    var hash = sha3Digest(convertStringToUint8List(jsonEncode(content)));
+    var contractAddress = EthereumAddress.fromHex(issuer);
+
+    var contract = DeployedContract(
+        ContractAbi.fromJson(jsonEncode(IdentifierABI), "Identifier"),
+        contractAddress);
+
+    var verify = contract.function("verify");
+    var isValid = await globalController.ethClient.call(
+        contract: contract,
+        function: verify,
+        params: [hexToBytes(signature), hash]);
     print(isValid[0]);
-    valid.value = isValid[0] ? 1 : -1;
+    return isValid[0];
   }
 }
